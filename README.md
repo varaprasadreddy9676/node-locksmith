@@ -25,15 +25,11 @@ Lock Your Node.js App Into Single-Instance Mode with Ease!
    - [Reliability](#-reliability)
    - [Peace of Mind](#-peace-of-mind)
 
-6. [Keep It Up-to-Date](#keep-it-up-to-date)
+6. [Keep It Up-to-Date](#-keep-it-up-to-date)
 
-   - [Semantic Versioning](#semantic-versioning)
+7. [Dependencies](#-dependencies)
 
-7. [Dependencies](#dependencies)
-
-   - [Third-Party Libraries](#third-party-libraries)
-
-8. [Troubleshooting](#troubleshooting)
+8. [Troubleshooting](#-troubleshooting)
 
    - [Lock File Issues](#1-lock-file-issues)
    - [Permission Errors](#2-permission-errors)
@@ -45,13 +41,13 @@ Lock Your Node.js App Into Single-Instance Mode with Ease!
    - [Module Import Errors](#8-module-import-errors)
    - [Unexpected Behavior](#9-unexpected-behavior)
 
-9. [Credits](#credits)
+9. [Credits](#-credits)
 
-10. [Author](#author)
+10. [Author](#-author)
 
-11. [Feedback and Contribution](#feedback-and-contribution)
+11. [Feedback and Contribution](#-feedback-and-contribution)
 
-12. [License](#license)
+12. [License](#-license)
 
 ### 🚀 Introduction
 
