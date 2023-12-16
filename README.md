@@ -78,6 +78,14 @@ Node Locksmith uses semantic versioning. To ensure you have the latest improveme
 
 npm update node-locksmith
 
+### Dependencies
+
+node-locksmith utilizes the following third-party libraries:
+
+- ps-node: A process lookup utility for Node.js.
+
+Make sure to check out their documentation for more details on how they work.
+
 ### 📣 Feedback and Contribution
 
 We love to hear from you! If you have any feedback, issues, or suggestions for Node Locksmith, please open an issue on our repository.
