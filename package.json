@@ -1,0 +1,11 @@
+{
+  "name": "locksmith",
+  "version": "1.0.0",
+  "description": "node-locksmith ensures that only a single instance of an application can run at once. It uses a lock file to maintain a system-level mutex.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sai",
+  "license": "MIT"
+}
