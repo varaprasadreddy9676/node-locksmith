@@ -1,5 +1,16 @@
 # Node Locksmith
 
+<p align=“center”>
+  <img src=“https://github.com/varaprasadreddy9676/node-locksmith/blob/main/logo/node-locksmith.png?raw=true
+ alt=“node-locksmith Logo” width=“200”/>
+</p>
+
+<h1 align=“center”>Node Locksmith</h1>
+
+<p align=“center”>
+Lock Your Node.js App Into Single-Instance Mode with Ease!
+</p>
+
 ## Lock Your Node.js App Into Single-Instance Mode with Ease!
 
 Node Locksmith is an elegant and straightforward Node.js module that ensures your application runs as a single instance, preventing multiple executions that could lead to data corruption or unexpected behavior. Imagine a world where starting your app twice is impossible – that's the peace of mind Node Locksmith offers!
