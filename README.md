@@ -84,7 +84,13 @@ const options = {
     maxRetries: 3,                // Set the maximum number of retries for acquiring the lock
     defaultAnswer: 'yes'          // Set the default answer for user prompts
 }
-const lockManager = new (require('node-locksmith'))(options).initializeTerminationHandlers();
+
+const LockManager = require('node-locksmith');
+
+const lockManager = new LockManager(options);
+
+// Initializes termination event handlers for graceful application shutdown.
+lockManager.initializeTerminationHandlers();
 
 async function main() {
 // Check and create a lock before running your app logic
