@@ -12,25 +12,18 @@ Lock Your Node.js App Into Single-Instance Mode with Ease!
 
 1. [Introduction](#-introduction)
 
-   - [Node Locksmith](#-node-locksmith)
    - [Features](#-features)
 
-2. [Installation](#installation)
+2. [Installation](#-installation)
 
-   - [npm Install](#npm-install)
+3. [Quick Start](#-quick-start)
 
-3. [Quick Start](#quick-start)
+4. [Configuration](#-configuration)
 
-   - [Usage Example](#usage-example)
+5. [Exception Handling & Scenarios](#-exception-handling--scenarios)
 
-4. [Configuration](#configuration)
-
-   - [Options](#options)
-
-5. [Exception Handling & Scenarios](#exception-handling--scenarios)
-
-   - [Reliability](#reliability)
-   - [Peace of Mind](#peace-of-mind)
+   - [Reliability](#-reliability)
+   - [Peace of Mind](#-peace-of-mind)
 
 6. [Keep It Up-to-Date](#keep-it-up-to-date)
 
