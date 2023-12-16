@@ -8,6 +8,60 @@
 Lock Your Node.js App Into Single-Instance Mode with Ease!
 </p>
 
+Certainly! Here's the table of contents for your README:
+
+1. [Introduction](#introduction)
+
+   - [Node Locksmith](#node-locksmith)
+   - [Features](#features)
+
+2. [Installation](#installation)
+
+   - [npm Install](#npm-install)
+
+3. [Quick Start](#quick-start)
+
+   - [Usage Example](#usage-example)
+
+4. [Configuration](#configuration)
+
+   - [Options](#options)
+
+5. [Robust Exception Handling & Real-Life Scenarios](#robust-exception-handling--real-life-scenarios)
+
+   - [Exceptional Reliability](#exceptional-reliability-in-every-scenario)
+   - [Beyond Exception Handling](#beyond-exception-handling-the-peace-of-mind-guarantee)
+
+6. [Keep It Up-to-Date](#keep-it-up-to-date)
+
+   - [Semantic Versioning](#semantic-versioning)
+
+7. [Dependencies](#dependencies)
+
+   - [Third-Party Libraries](#third-party-libraries)
+
+8. [Troubleshooting](#troubleshooting)
+
+   - [Lock File Issues](#1-lock-file-issues)
+   - [Permission Errors](#2-permission-errors)
+   - [Concurrent Launch Failures](#3-concurrent-launch-failures)
+   - [Signal Handling](#4-signal-handling)
+   - [Failed to Exit Previous Instance](#5-failed-to-exit-previous-instance)
+   - [Incorrect PID in Lock File](#6-incorrect-pid-in-lock-file)
+   - [Delayed Lock Release on Exit](#7-delayed-lock-release-on-exit)
+   - [Module Import Errors](#8-module-import-errors)
+   - [Unexpected Behavior](#9-unexpected-behavior)
+
+9. [Credits](#credits)
+
+10. [Author](#author)
+
+11. [Feedback and Contribution](#feedback-and-contribution)
+
+12. [License](#license)
+
+### 🚀 Introduction
+
 Node Locksmith is an elegant and straightforward Node.js module that ensures your application runs as a single instance, preventing multiple executions that could lead to data corruption or unexpected behavior. Imagine a world where starting your app twice is impossible – that's the peace of mind Node Locksmith offers!
 
 Whether you're managing batch jobs, cron tasks, or any other Node.js scripts, Node Locksmith keeps them unique so your system stays safe and predictable.
@@ -31,8 +85,18 @@ npm install node-locksmith
 Here's how simple it is to use Node Locksmith:
 
 ```
-// Import the LockManager class
-const LockManager = require('node-locksmith');
+// Import and initialize the LockManager class
+
+const options = {
+    lockFileName: 'medics_lab_interface_server.lock',
+    killTimeout: 10000,            // Set the timeout for waiting before terminating previous instance (in ms) if its already running.
+    waitForExitTimeout: 20000,    // Set the timeout for waiting for the old process to exit (milliseconds)
+    checkInterval: 500,           // Set the interval for checking the status of the other process (milliseconds)
+    maxRetries: 3,                // Set the maximum number of retries for acquiring the lock
+    defaultAnswer: 'yes'          // Set the default answer for user prompts
+}
+const lockManager = new (require('node-locksmith'))(options).initializeTerminationHandlers();
+
 
 // Create a new instance with optional custom settings
 const lockManager = new LockManager({
@@ -60,14 +124,14 @@ And voilà – you're now running with a robust single-instance lock!
 
 Node Locksmith's configuration is both flexible and straightforward:
 
-| Option             | Description                                                    | Default                    |
-| ------------------ | -------------------------------------------------------------- | -------------------------- |
-| lockFileName       | Name of your lock file.                                        | 'app.lock'                 |
-| lockFileDir        | Directory for the lock file.                                   | \_\_dirname (your app dir) |
-| killTimeout        | Time to wait before terminating previous instance (in ms).     | 5000                       |
-| waitForExitTimeout | Time to wait for the old instance to exit (in ms).             | 10000                      |
-| checkInterval      | Interval to check if the previous instance has exited (in ms). | 500                        |
-| maxRetries         | How many times to retry lock acquisition.                      | 3                          |
+| Option             | Description                                                                          | Default                    |
+| ------------------ | ------------------------------------------------------------------------------------ | -------------------------- |
+| lockFileName       | Name of your lock file.                                                              | 'app.lock'                 |
+| lockFileDir        | Directory for the lock file.                                                         | \_\_dirname (your app dir) |
+| killTimeout        | (Already running process) Time to wait before terminating existing instance (in ms). | 5000                       |
+| waitForExitTimeout | Time to wait for the old instance to exit (in ms).                                   | 10000                      |
+| checkInterval      | Interval to check if the previous instance has exited (in ms).                       | 500                        |
+| maxRetries         | How many times to retry lock acquisition.                                            | 3                          |
 
 ### 🛡️ Robust Exception Handling & Real-Life Scenarios
 
@@ -103,6 +167,109 @@ node-locksmith utilizes the following third-party libraries:
 - ps-node: A process lookup utility for Node.js.
 
 Make sure to check out their documentation for more details on how they work.
+
+### Troubleshooting
+
+Encountering issues can be a hiccup in developing great applications. If you run into any problems with node-locksmith, here are some common issues and their respective solutions.
+
+#### 1. Lock File Issues
+
+Issue: The lock file is not created where expected or is prematurely deleted.
+
+Solution:
+
+- Ensure the lockFileDir directory is writable by the application. If unspecified, process.cwd() is used by default.
+- Check for external processes or scheduled clean-up jobs that might modify or delete files in the lock file directory.
+
+#### 2. Permission Errors
+
+Issue: Encountering permission errors when trying to create, write, or delete the lock file.
+
+Solution:
+
+- Review file system permissions and user ownership for the lock file directory.
+- On Unix-like systems, consider proper permission management or running the process with elevated privileges (sudo) if appropriate.
+
+#### 3. Concurrent Launch Failures
+
+Issue: Multiple instances seem to bypass the lock mechanism, running simultaneously.
+
+Solution:
+
+- Modify checkInterval and maxRetries configuration parameters to give instances more time or attempts to acquire the lock.
+- Double-check that the lock file path is consistent across instances and no instance-specific paths are being used.
+
+#### 4. Signal Handling
+
+Issue: Application doesn’t release the lock after receiving a termination signal.
+
+Solution:
+
+- Ensure lockManager.initializeTerminationHandlers() is called during application setup.
+- Avoid overriding default signal handlers that may prevent node-locksmith from performing clean-up tasks.
+
+#### 5. Failed to Exit Previous Instance
+
+Issue: The application does not terminate the previous instance when requested.
+
+Solution:
+
+- The previous process may require more privileges to be terminated. Run the new instance with adequate permissions, or manually terminate the older one.
+- Investigate whether the operating system’s process management settings are interfering with signal delivery.
+
+#### 6. Incorrect PID in Lock File
+
+Issue: The lock file contains an invalid or old PID, causing conflicts.
+
+Solution:
+
+- Ensure the application closes cleanly to update or remove the lock file.
+- Add additional error handling to detect when the PID in the lock file does not correspond to a running process.
+
+#### 7. Delayed Lock Release on Exit
+
+Issue: The lock file remains after the application exits.
+
+Solution:
+
+- Confirm that clean-up code executes correctly and listen to the correct events for process termination.
+- Look out for asynchronous operations that may delay the process’s exit and subsequently delay the lock release.
+
+#### 8. Module Import Errors
+
+Issue: TypeScript definitions are missing or not found, resulting in import errors.
+
+Solution:
+
+- If using TypeScript, ensure you’ve included type declarations for node-locksmith, or create a .d.ts file declaring module typings.
+- Check that the module is installed correctly under node_modules and is not corrupted.
+
+#### 9. Unexpected Behavior
+
+Issue: Experiencing erratic behavior or errors that are not covered by the guide.
+
+Solution:
+
+- Check the Node.js version for compatibility issues; update Node.js or node-locksmith if necessary.
+- Review the project’s GitHub issues for similar problems, or report a new issue with detailed information about the Node.js version, operating system, stack trace, and steps to reproduce the error.
+
+For issues beyond these common scenarios, please open an issue on the node-locksmith GitHub repository with as much detail as possible. Our community is here to help!
+
+### 📜 Credits
+
+This module stands as a testament to the collective knowledge and inspiration drawn from significant figures who have played pivotal roles in shaping my professional journey. Gratitude is extended to:
+
+- My CEO: For visionary leadership and unwavering support that has been instrumental in fostering my growth. His profound insights into the internals of software engineering, emphasis on principles of engineering like modularity, scalability and robustness, and the embodiment of a forward-thinking vision have been invaluable. The teachings and experiences derived from his mentorship have left an great mark on this me and significantly influenced my approach to software development.
+
+- The Management Team & Colleagues: Providing invaluable guidance, encouragement, and the freedom to innovate, this team has been crucial to the development of this module.
+
+- The Broader Open-Source Community: Acknowledgment to the tireless efforts of the open-source community, whose contributions to the Node.js ecosystem laid the foundation upon which this module stands.
+
+I express deep gratitude for the collective wisdom and experiences shared by each individual mentioned above. Their influence has not only shaped this project but has also profoundly impacted my understanding of software development.
+
+### ✍️ Author
+
+- Sai varaprasad (https://github.com/varaprasadreddy9676) - Initial work - A passionate software engineer who enjoys turning complex problems into simple, beautiful, and intuitive solutions. When I’m not coding, evangelizing best practices, you can find me immersed in reading, exploring new technology.
 
 ### 📣 Feedback and Contribution
 
