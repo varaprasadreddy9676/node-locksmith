@@ -1,8 +1,8 @@
 # Node Locksmith
 
-<p align=“center”>
-  <img src=“https://github.com/varaprasadreddy9676/node-locksmith/blob/main/logo/node-locksmith.png?raw=true
- alt=“node-locksmith Logo” width=“200”/>
+<p align="center">
+  <img src="https://github.com/varaprasadreddy9676/node-locksmith/blob/main/logo/node-locksmith.png?raw=true
+ alt="node-locksmith Logo" width="200"/>
 </p>
 
 <h1 align=“center”>Node Locksmith</h1>
