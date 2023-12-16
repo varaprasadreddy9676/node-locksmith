@@ -10,5 +10,32 @@
   "license": "MIT",
   "dependencies": {
     "ps-node": "^0.1.6"
-  }
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "node.js",
+    "lock",
+    "lock manager",
+    "singleton",
+    "process control",
+    "concurrency",
+    "single instance",
+    "task scheduling",
+    "cron",
+    "batch jobs",
+    "scheduling",
+    "task management",
+    "maintenance tasks",
+    "deployment",
+    "development utilities",
+    "express",
+    "react",
+    "ps-node",
+    "backend",
+    "frontend",
+    "fullstack",
+    "devops",
+    "engines"
+  ]
 }
