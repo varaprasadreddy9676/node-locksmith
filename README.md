@@ -250,7 +250,7 @@ I express deep gratitude for the collective wisdom and experiences shared by eac
 
 ### ✍️ Author
 
-- Sai varaprasad (https://github.com/varaprasadreddy9676) - Initial work - A passionate software engineer who enjoys turning complex problems into simple, beautiful, and intuitive solutions. When I’m not coding, evangelizing best practices, you can find me immersed in reading, exploring new technology.
+Sai varaprasad (https://github.com/varaprasadreddy9676) - Initial work - A passionate software engineer who enjoys turning complex problems into simple, beautiful, and intuitive solutions. When I’m not coding, evangelizing best practices, you can find me immersed in reading, exploring new technology.
 
 ### 📣 Feedback and Contribution
 
