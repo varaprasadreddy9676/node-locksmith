@@ -23,7 +23,7 @@ class LockManager {
     constructor(options = {}) {
         const defaults = {
             lockFileName: 'app.lock',
-            lockFileDir: __dirname,
+            lockFileDir: process.cwd(), // Use the current working directory           
             killTimeout: 5000,
             waitForExitTimeout: 10000,
             checkInterval: 500,
@@ -132,6 +132,51 @@ class LockManager {
             }
         }
     }
+
+    /**
+ * Initializes termination event handlers for graceful application shutdown.
+ *
+ * @method initializeTerminationHandlers
+ * @memberof LockManager
+ * @description This method sets up event handlers for termination signals (SIGINT, SIGTERM, and exit)
+ *              to handle the graceful termination of the application. It ensures that the lock file
+ *              is removed if it was acquired during the application's execution.
+ * @returns {void}
+ * @example
+ * const lockManager = new LockManager();
+ * lockManager.initializeTerminationHandlers();
+ */
+    initializeTerminationHandlers() {
+        // Save reference to the current instance for use in the event listeners.
+        const lockManagerInstance = this;
+
+        /**
+         * Handles the termination signals (SIGINT, SIGTERM, exit) for graceful shutdown.
+         *
+         * @function handleTermination
+         * @param {string} signal - The termination signal received.
+         * @returns {void}
+         */
+        function handleTermination(signal) {
+            console.info(`Received ${signal}, handling termination...`);
+            // Check if the lock should be removed based on the current instance state.
+            if (lockManagerInstance.lockAcquired) {
+                lockManagerInstance.removeLock()
+                    .then(() => console.info('Lock file removed.'))
+                    .catch((error) => console.error('Error removing lock file:', error))
+                    .finally(() => process.exit(0));
+            } else {
+                console.info('Lock was not acquired. Exiting without removing lock file.');
+                process.exit(0);
+            }
+        }
+
+        // Register termination handlers to clean up resources before exiting.
+        process.on('SIGINT', handleTermination);
+        process.on('SIGTERM', handleTermination);
+        process.on('exit', handleTermination);
+    }
+
 
     /**
      * Removes the lock file, releasing the lock.
