@@ -27,10 +27,10 @@ Lock Your Node.js App Into Single-Instance Mode with Ease!
 
    - [Options](#options)
 
-5. [Robust Exception Handling & Real-Life Scenarios](#robust-exception-handling--real-life-scenarios)
+5. [Exception Handling & Scenarios](#exception-handling--scenarios)
 
-   - [Exceptional Reliability](#exceptional-reliability-in-every-scenario)
-   - [Beyond Exception Handling](#beyond-exception-handling-the-peace-of-mind-guarantee)
+   - [Reliability](#reliability)
+   - [Peace of Mind](#peace-of-mind)
 
 6. [Keep It Up-to-Date](#keep-it-up-to-date)
 
