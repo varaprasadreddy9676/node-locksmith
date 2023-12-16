@@ -29,7 +29,7 @@ npm install node-locksmith
 ### 🚀 Quick Start
 
 Here's how simple it is to use Node Locksmith:
-
+```
 // Import the LockManager class
 const LockManager = require('node-locksmith');
 
@@ -52,7 +52,7 @@ await lockManager.createLock();
 
 // Start your app with LockManager in control
 main();
-
+```
 And voilà – you're now running with a robust single-instance lock!
 
 ### 🛠 Configuration
