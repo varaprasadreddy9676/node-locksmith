@@ -78,7 +78,7 @@ Node Locksmith uses semantic versioning. To ensure you have the latest improveme
 
 npm update node-locksmith
 
-### Dependencies
+### 📦 Dependencies
 
 node-locksmith utilizes the following third-party libraries:
 
