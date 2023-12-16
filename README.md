@@ -8,57 +8,36 @@
 Lock Your Node.js App Into Single-Instance Mode with Ease!
 </p>
 
-Certainly! Here's the table of contents for your README:
+## Table of Contents
 
-1. [Introduction](#introduction)
+1. Introduction
+2. Features
+3. Installation
+4. Quick Start
+5. Configuration
+6. Robust Exception Handling & Real-Life Scenarios
 
-   - [Node Locksmith](#node-locksmith)
-   - [Features](#features)
+- Exceptional Reliability in Every Scenario
+- Beyond Exception Handling: The Peace of Mind Guarantee
 
-2. [Installation](#installation)
+7. Keep It Up-to-Date
+8. Dependencies
+9. Troubleshooting
 
-   - [npm Install](#npm-install)
+- Lock File Issues
+- Permission Errors
+- Concurrent Launch Failures
+- Signal Handling
+- Failed to Exit Previous Instance
+- Incorrect PID in Lock File
+- Delayed Lock Release on Exit
+- Module Import Errors
+- Unexpected Behavior
 
-3. [Quick Start](#quick-start)
-
-   - [Usage Example](#usage-example)
-
-4. [Configuration](#configuration)
-
-   - [Options](#options)
-
-5. [Robust Exception Handling & Real-Life Scenarios](#robust-exception-handling--real-life-scenarios)
-
-   - [Exceptional Reliability](#exceptional-reliability-in-every-scenario)
-   - [Beyond Exception Handling](#beyond-exception-handling-the-peace-of-mind-guarantee)
-
-6. [Keep It Up-to-Date](#keep-it-up-to-date)
-
-   - [Semantic Versioning](#semantic-versioning)
-
-7. [Dependencies](#dependencies)
-
-   - [Third-Party Libraries](#third-party-libraries)
-
-8. [Troubleshooting](#troubleshooting)
-
-   - [Lock File Issues](#1-lock-file-issues)
-   - [Permission Errors](#2-permission-errors)
-   - [Concurrent Launch Failures](#3-concurrent-launch-failures)
-   - [Signal Handling](#4-signal-handling)
-   - [Failed to Exit Previous Instance](#5-failed-to-exit-previous-instance)
-   - [Incorrect PID in Lock File](#6-incorrect-pid-in-lock-file)
-   - [Delayed Lock Release on Exit](#7-delayed-lock-release-on-exit)
-   - [Module Import Errors](#8-module-import-errors)
-   - [Unexpected Behavior](#9-unexpected-behavior)
-
-9. [Credits](#credits)
-
-10. [Author](#author)
-
-11. [Feedback and Contribution](#feedback-and-contribution)
-
-12. [License](#license)
+10. Credits
+11. Author
+12. Feedback and Contribution
+13. License
 
 ### 🚀 Introduction
 
@@ -85,7 +64,7 @@ npm install node-locksmith
 Here's how simple it is to use Node Locksmith:
 
 ```
-// Import and initialize the LockManager class
+// Import and Create a new instance with optional custom settings
 
 const options = {
     lockFileName: 'medics_lab_interface_server.lock',
@@ -96,14 +75,6 @@ const options = {
     defaultAnswer: 'yes'          // Set the default answer for user prompts
 }
 const lockManager = new (require('node-locksmith'))(options).initializeTerminationHandlers();
-
-
-// Create a new instance with optional custom settings
-const lockManager = new LockManager({
-lockFileName: 'myApp.lock' // Customize your lock file name
-});
-
-lockManager.initializeTerminationHandlers(); // Initializes termination event handlers for graceful application shutdown.
 
 async function main() {
 // Check and create a lock before running your app logic
