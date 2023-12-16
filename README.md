@@ -29,6 +29,7 @@ npm install node-locksmith
 ### 🚀 Quick Start
 
 Here's how simple it is to use Node Locksmith:
+
 ```
 // Import the LockManager class
 const LockManager = require('node-locksmith');
@@ -45,35 +46,12 @@ await lockManager.createLock();
 
     // Your app logic goes here
 
-    // When all done, cleanup by removing the lock
-    await lockManager.removeLock();
-
 }
 
 // Start your app with LockManager in control
 main();
-
-async function handleTermination() {
-    try {
-        // Remove the lock to allow future instances
-        await lockManager.removeLock();
-        
-        // Log termination message and exit the process
-        logger.info('Application is terminated gracefully.');
-        process.exit();
-    } catch (error) {
-        // Log termination errors and exit the process with an error code
-        logger.error('Error during termination:', error);
-        process.exit(1);
-    }
-}
-
-// Handle termination signals to clean up resources before exiting
-process.on('exit', handleTermination);
-process.on('SIGINT', handleTermination);
-process.on('SIGTERM', handleTermination);
-
 ```
+
 And voilà – you're now running with a robust single-instance lock!
 
 ### 🛠 Configuration
@@ -88,6 +66,65 @@ killTimeout | Time to wait before forcefully terminating the previous instance (
 waitForExitTimeout | Time to wait for the old instance to exit (in ms). | 10000
 checkInterval | Interval to check whether the previous instance has exited (in ms). | 500
 maxRetries | How many times to retry lock acquisition. | 3
+
+### ⚙️ Integration Guide
+
+To ensure the best robustness and to take full advantage of Node Locksmith, follow these steps to integrate the locking mechanism into your main Node.js application file.
+
+Step 1: Import and Set Up LockManager
+
+At the top of your main file, import LockManager from node-locksmith and create an instance:
+
+const LockManager = require(‘node-locksmith’);
+const lockManager = new LockManager({
+lockFileName: ‘myApp.lock’ // Customize your lock file name if needed
+});
+
+Step 2: Check and Create a Lock
+
+Just before your main application logic, ensure that there’s no existing lock, then create a new one:
+
+async function main() {
+await lockManager.checkLock(); // This will throw an error if another instance is running
+await lockManager.createLock();
+
+// Your app logic goes here
+
+// At the end, remove the lock
+await lockManager.removeLock();
+}
+
+main().catch(console.error); // In case checkLock detects a running instance
+
+Step 3: Graceful Shutdown Handling
+
+To handle application shutdown properly (e.g., when interrupt signals like SIGINT or SIGTERM are received), include the handleTermination function in your main file and attach it to the appropriate process events.
+
+Add this code towards the end of your main file:
+
+async function handleTermination(signal) {
+try {
+console.info(Received ${signal}, terminating gracefully...);
+
+    // Your pre-exit logic (if any)
+
+    // Remove the lock to allow future instances
+    await lockManager.removeLock();
+
+    console.info(‘Application terminated gracefully.’);
+    process.exit(0);
+
+} catch (error) {
+console.error(‘Error during termination:’, error);
+process.exit(1);
+}
+}
+
+// Handle termination signals to clean up resources before exiting
+process.on(‘SIGINT’, () => handleTermination(‘SIGINT’));
+process.on(‘SIGTERM’, () => handleTermination(‘SIGTERM’));
+
+By adding these code snippets to your main file, you can control the execution of your application with Node Locksmith and prevent multiple instances from running simultaneously.
 
 ### 📚 Usage Guide & Examples
 
