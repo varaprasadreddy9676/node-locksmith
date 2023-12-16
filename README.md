@@ -52,6 +52,27 @@ await lockManager.createLock();
 
 // Start your app with LockManager in control
 main();
+
+async function handleTermination() {
+    try {
+        // Remove the lock to allow future instances
+        await lockManager.removeLock();
+        
+        // Log termination message and exit the process
+        logger.info('Application is terminated gracefully.');
+        process.exit();
+    } catch (error) {
+        // Log termination errors and exit the process with an error code
+        logger.error('Error during termination:', error);
+        process.exit(1);
+    }
+}
+
+// Handle termination signals to clean up resources before exiting
+process.on('exit', handleTermination);
+process.on('SIGINT', handleTermination);
+process.on('SIGTERM', handleTermination);
+
 ```
 And voilà – you're now running with a robust single-instance lock!
 
