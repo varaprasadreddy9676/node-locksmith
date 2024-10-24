@@ -245,17 +245,6 @@ Solution:
 
 For issues beyond these common scenarios, please open an issue on the node-locksmith GitHub repository with as much detail as possible. Our community is here to help!
 
-### 📜 Credits
-
-This module stands as a testament to the collective knowledge and inspiration drawn from significant figures who have played pivotal roles in shaping my professional journey. Gratitude is extended to:
-
-- My CEO: For visionary leadership and unwavering support that has been instrumental in fostering my growth. His profound insights into the internals of software engineering, emphasis on principles of engineering like modularity, scalability and robustness, and the embodiment of a forward-thinking vision have been invaluable. The teachings and experiences derived from his mentorship have left an great mark on this me and significantly influenced my approach to software development.
-
-- The Management Team & Colleagues: Providing invaluable guidance, encouragement, and the freedom to innovate, this team has been crucial to the development of this module.
-
-- The Broader Open-Source Community: Acknowledgment to the tireless efforts of the open-source community, whose contributions to the Node.js ecosystem laid the foundation upon which this module stands.
-
-I express deep gratitude for the collective wisdom and experiences shared by each individual mentioned above. Their influence has not only shaped this project but has also profoundly impacted my understanding of software development.
 
 ### ✍️ Author
 
